@@ -3,6 +3,7 @@ from typing import Optional
 from eth_utils import to_checksum_address
 from web3.auto import w3
 from multicall import Signature
+from multicall.constants import RuntimeCode
 
 
 class Call:
@@ -28,7 +29,7 @@ class Call:
     def data(self):
         return self.signature.encode_data(self.args)
 
-    def decode_output(self, output, success: Optional[bool]=None):
+    def decode_output(self, output, success: Optional[bool] = None):
         if success is None:
             apply_handler = lambda handler, value: handler(value)
         else:
@@ -54,5 +55,16 @@ class Call:
     def __call__(self, args=None):
         args = args or self.args
         calldata = self.signature.encode_data(args)
-        output = self.w3.eth.call({'to': self.target, 'data': calldata}, block_identifier=self.block_id)
+
+        output = self.w3.eth.call(
+            {'to': self.target, 'data': calldata},
+            block_identifier=self.block_id,
+            # we don't need to deploy a contract, just use override
+            # this is useful for calling the contract which is deploying ahead our contract
+            state_override={
+                self.target: {
+                    "code": RuntimeCode,
+                }
+            },
+        )
         return self.decode_output(output)
