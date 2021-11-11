@@ -39,7 +39,10 @@ class Call:
             try:
                 decoded = self.signature.decode_data(output)
             except:
-                success, decoded = False, [None] * len(self.returns)
+                if self.returns:
+                    success, decoded = False, [None] * len(self.returns)
+                else:
+                    return RuntimeError(f"output: {output}")
         else:
             decoded = [None] * len(self.returns)
 
