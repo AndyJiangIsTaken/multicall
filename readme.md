@@ -5,7 +5,7 @@ python interface for makerdao's [multicall](https://github.com/makerdao/multical
 ## installation
 
 ```
-pip install git+git@github.com:AndyJiangIsTaken/multicall.git
+pip install git+git@github.com/AndyJiangIsTaken/multicall.git@v2.0
 ```
 
 ## example
