@@ -31,4 +31,5 @@ MULTICALL2_ADDRESSES = {
     Network.Rinkeby: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
     Network.Görli: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
     Network.Bsc: '0xb0b117eA39D4dff655173D8384D46679807B1593',
+    Network.Polygon: '0xb0b117eA39D4dff655173D8384D46679807B1593'
 }
